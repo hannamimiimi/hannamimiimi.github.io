@@ -5,16 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Мои ссылки</title>
 <style>
-:root{--bg:#0b1220}
+:root{--bg:#fff0f5}
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#0b1220 0%,#122033 100%);color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+body{
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#fff0f5 0%,#ffd7e6 100%);
+  color:#222;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:24px;
+}
 .container{width:100%;max-width:420px;text-align:center}
-.avatar{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 18px;box-shadow:0 6px 20px rgba(0,0,0,.6)}
+.avatar{
+  width:110px;height:110px;border-radius:50%;object-fit:cover;
+  margin:0 auto 18px;box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
 .title{font-size:1.6rem;margin:0 0 6px}
 .desc{opacity:.85;margin:0 0 18px}
 .links{display:flex;flex-direction:column;gap:12px}
-.link{display:block;padding:14px 18px;border-radius:12px;text-decoration:none;font-weight:600;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.04);color:inherit}
-.link:hover{transform:translateY(-3px);transition:all .18s}
+.link{
+  display:block;padding:14px 18px;border-radius:12px;text-decoration:none;
+  font-weight:600;background:linear-gradient(90deg,#ffffff,#fff6fb);
+  border:1px solid rgba(0,0,0,.06);color:inherit;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+.link:hover{
+  transform:translateY(-3px);transition:all .18s;
+  box-shadow:0 8px 26px rgba(0,0,0,.08);
+}
 .footer{margin-top:20px;font-size:.8rem;opacity:.6}
 </style>
 </head>
