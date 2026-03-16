@@ -1,153 +1,219 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap" rel="stylesheet">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hannamimiimi</title>
-<style>
-:root{--bg:#fff0f5}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  :linear-gradient(135deg,#fff0f5 0%,#ffd7e6 100%);
-  color:#222;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:100vh;
-  padding:24px;
-}
-/* ПУЛЬСИРУЮЩИЙ ФОН (вставь в <style>) */
-.container::before{
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -image: url("background2.jpg"); /* <- имя файла чувствительно к регистру */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -2;
-  transform-origin: center center;
-  will-change: transform;
-  animation: bgPulse 20s ease-in-out infinite;
-}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>hannamimiimi</title>
 
-/* Полупрозрачный цветовой фильтр поверх картинки (чтобы текст читался) */
-.container::after{
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  : linear-gradient(180deg, rgba(255,240,245,0.28), rgba(255,215,230,0.36));
-  z-index: -1;
-  pointer-events: none;
-}
+  <!-- Шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
-/* Анимация — масштабирование */
-@keyframes bgPulse{
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.04); } /* увеличивается на 4% */
-  100% { transform: scale(1); }
-}
+  <style>
+  :root{
+    --accent1: #ff6b9d;
+    --accent2: #ffb6c1;
+    --text-dark: #222;
+    --overlay-start: rgba(255,240,245,0.28);
+    --overlay-end: rgba(255,215,230,0.36);
+    --shadow-soft: rgba(255,107,157,0.18);
+    --shadow-glow: rgba(255,182,193,0.14);
+  }
 
-/* Мобильные устройства — поменьше масштаб и быстрее цикл (чтобы не нагружать) */
-@media (max-width: 600px){
+  /* reset / box-model */
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{height:100%;min-height:100%;font-family:Poppins,Arial,Helvetica,sans-serif;background:#fff}
+  body{
+    margin:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:24px;
+    color:var(--text-dark);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  /* контейнер и фон */
+  .container{
+    width:100%;
+    max-width:420px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+    padding-top:20px;
+  }
+
+  /* пульсирующий фон (фон-фото файл background2.jpg должен быть в корне репозитория) */
   .container::before{
-    animation: bgPulseMobile 14s ease-in-out infinite;
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:url("background2.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    z-index:-2;
+    transform-origin:center center;
+    will-change:transform;
+    animation:bgPulse 20s ease-in-out infinite;
   }
-  @keyframes bgPulseMobile{
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.02); } /* меньше масштаба на телефонах */
-    100% { transform: scale(1); }
+
+  /* мягкий цветовой фильтр поверх фоновой картинки для читабельности */
+  .container::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:linear-gradient(180deg, var(--overlay-start), var(--overlay-end));
+    z-index:-1;
+    pointer-events:none;
   }
-}
-.avatar{
-  width:110px;height:110px;border-radius:50%;object-fit:cover;
-  margin:0 auto 18px;box-shadow:0 6px 20px rgba(0,0,0,.08);
-}
-.title{font-size:1.6rem;margin:0 0 6px}
-.desc{opacity:.85;margin:0 0 18px}
-.links{display:flex;flex-direction:column;gap:12px}
-/* --- стиль кнопок в духе incognitofox --- */
-.link{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;                       /* расстояние между иконкой и текстом */
-  padding:16px 26px;              /* вертикальная/горизонтальная подушка */
-  border-radius:50px;             /* большая скруглённая "pill" форма */
-  text-decoration:none;
-  color:#fff;                     /* белый текст поверх градиента */
-  :linear-gradient(135deg,#ff6b9d 0%,#ffb6c1 100%); /* розово-пастельный градиент */
-  box-shadow:0 6px 18px rgba(255,107,157,0.18), 0 0 30px rgba(255,182,193,0.06);
-  transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, filter .22s;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  text-align:center;
-  white-space:nowrap;
-  font-family: 'La Belle Aurore', cursive; /* у тебя этот шрифт подключён */
-  font-size:inherit; /* оставляем текущий размер (ты уже подбирал раньше) */
-  letter-spacing: .5px;
-}
 
-/* эффект при наведении — подъём + усиление свечения */
-.link:hover{
-  transform:translateY(-6px);
-  box-shadow:0 14px 40px rgba(255,107,157,0.30), 0 0 50px rgba(255,182,193,0.14);
-  filter:brightness(1.03);
-}
+  @keyframes bgPulse{
+    0%   { transform:scale(1); }
+    50%  { transform:scale(1.04); }
+    100% { transform:scale(1); }
+  }
+  @media (max-width:600px){
+    .container::before{ animation: bgPulseMobile 14s ease-in-out infinite }
+    @keyframes bgPulseMobile{
+      0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}
+    }
+  }
 
-/* лёгкая реакция при клике */
-.link:active{
-  transform:translateY(-2px);
-  transition:transform .08s;
-}
+  /* аватар */
+  .avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    margin:0 auto 18px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    display:block;
+  }
 
-/* иконка слева (если используешь <img> или <span> для эмодзи) */
-.button-icon{
-  width:32px;
-  height:32px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-  margin-right:6px;
-  font-size:20px; /* размер если используешь эмодзи вместо изображения */
-}
+  /* заголовок (Playfair Display) в стиле incognitofox */
+  .title{
+    font-family: 'Playfair Display', serif;
+    font-size:42px;
+    font-weight:600;
+    margin:8px 0 6px;
+    color:#121212;
+    letter-spacing:2px;
+    text-shadow:0 2px 20px rgba(255,182,193,0.28);
+  }
 
-/* дополнительная мягкая анимация для первой кнопки (опционально) */
-.link:first-child{
-  animation:softGlow 3s infinite ease-in-out;
-}
-@keyframes softGlow{
-  0%,100%{ box-shadow:0 6px 18px rgba(255,107,157,0.18), 0 0 30px rgba(255,182,193,0.06) }
-  50%{    box-shadow:0 12px 36px rgba(255,107,157,0.28), 0 0 56px rgba(255,182,193,0.12) }
-}
-.link:hover{
-  transform:translateY(-3px);transition:all .18s;
-  box-shadow:0 8px 26px rgba(0,0,0,.08);
-}
-.footer{margin-top:20px;font-size:.8rem;opacity:.6}
-</style>
+  /* подпись */
+  .desc{
+    font-family:Poppins,Arial,sans-serif;
+    font-size:15px;
+    font-weight:300;
+    font-style:italic;
+    margin:0 0 22px;
+    opacity:.9;
+    letter-spacing:1px;
+  }
+
+  /* контейнер кнопок (по центру) */
+  .links{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    margin-top:6px;
+  }
+
+  /* стиль pill-кнопок */
+  .link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:16px 28px;
+    border-radius:50px;
+    text-decoration:none;
+    color:#fff;
+    background:linear-gradient(135deg,var(--accent1) 0%,var(--accent2) 100%);
+    box-shadow:0 6px 18px var(--shadow-soft), 0 0 30px rgba(255,182,193,0.06);
+    transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, filter .22s;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    text-align:center;
+    white-space:nowrap;
+    font-family: 'La Belle Aurore', cursive;
+    font-size:1.6rem;
+    letter-spacing:.5px;
+  }
+
+  /* hover / active */
+  .link:hover{
+    transform:translateY(-6px);
+    box-shadow:0 14px 40px rgba(255,107,157,0.30), 0 0 50px var(--shadow-glow);
+    filter:brightness(1.03);
+  }
+  .link:active{ transform:translateY(-2px); transition:transform .08s; }
+
+  /* иконка/эмодзи рядом с текстом */
+  .button-icon{
+    width:32px;
+    height:32px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    margin-right:6px;
+    font-size:20px;
+  }
+
+  /* эффект для первой кнопки */
+  .link:first-child{ animation:softGlow 3s infinite ease-in-out; }
+  @keyframes softGlow{
+    0%,100%{ box-shadow:0 6px 18px rgba(255,107,157,0.18), 0 0 30px rgba(255,182,193,0.06) }
+    50%{    box-shadow:0 12px 36px rgba(255,107,157,0.28), 0 0 56px rgba(255,182,193,0.12) }
+  }
+
+  /* футер */
+  .footer{
+    margin-top:20px;
+    font-size:.8rem;
+    opacity:.6;
+    font-family:Poppins,Arial,sans-serif;
+  }
+
+  /* адаптивные подстройки */
+  @media (max-width:420px){
+    .title{font-size:28px; letter-spacing:1px}
+    .link{font-size:1.2rem; padding:12px 20px}
+    .avatar{width:90px;height:90px}
+  }
+  </style>
 </head>
 <body>
-<div class="container">
-<img class="avatar" src="avatar.PNG" alt="avatar">
-<h1 class="title">hannamimiimi</h1>
-<p class="desc"></p>
-<div class="links">
-<a class="link" href="https://boosty.to/druggkittyy" target="_blank" rel="noopener">secret content🩷</a>
-<a class="link" href="https://fansly.com/Honeylittlegirl/posts" target="_blank" rel="noopener">exclusive content🩷</a>
-</div>
-<p class="footer">© <span id="year"></span></p>
-</div>
-<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+  <div class="container">
+    <img class="avatar" src="avatar.PNG" alt="avatar">
+    <h1 class="title">hannamimiimi</h1>
+    <p class="desc"></p>
+
+    <div class="links">
+      <!-- Вариант с эмодзи (работает без загрузки внешних svg) -->
+      <a class="link" href="https://boosty.to/druggkittyy" target="_blank" rel="noopener">
+        <span class="button-icon">📩</span>
+        <span>secret content 🩷</span>
+      </a>
+
+      <a class="link" href="https://fansly.com/Honeylittlegirl/posts" target="_blank" rel="noopener">
+        <span class="button-icon">📸</span>
+        <span>exclusive content 🩷</span>
+      </a>
+    </div>
+
+    <p class="footer">© <span id="year"></span></p>
+  </div>
+
+  <script>
+    // год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
