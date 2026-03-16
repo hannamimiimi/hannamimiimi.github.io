@@ -27,11 +27,60 @@ body{
 .title{font-size:1.6rem;margin:0 0 6px}
 .desc{opacity:.85;margin:0 0 18px}
 .links{display:flex;flex-direction:column;gap:12px}
+/* --- стиль кнопок в духе incognitofox --- */
 .link{
-  display:block;padding:14px 18px;border-radius:12px;text-decoration:none;
-  font-weight:1000;font-family: 'La Belle Aurore', cursive;font-size:1.6rem;background:linear-gradient(90deg,#ffffff,#fff6fb);
-  border:1px solid rgba(0,0,0,.06);color:inherit;
-  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;                       /* расстояние между иконкой и текстом */
+  padding:16px 26px;              /* вертикальная/горизонтальная подушка */
+  border-radius:50px;             /* большая скруглённая "pill" форма */
+  text-decoration:none;
+  color:#fff;                     /* белый текст поверх градиента */
+  background:linear-gradient(135deg,#ff6b9d 0%,#ffb6c1 100%); /* розово-пастельный градиент */
+  box-shadow:0 6px 18px rgba(255,107,157,0.18), 0 0 30px rgba(255,182,193,0.06);
+  transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, filter .22s;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  text-align:center;
+  white-space:nowrap;
+  font-family: 'La Belle Aurore', cursive; /* у тебя этот шрифт подключён */
+  font-size:inherit; /* оставляем текущий размер (ты уже подбирал раньше) */
+  letter-spacing: .5px;
+}
+
+/* эффект при наведении — подъём + усиление свечения */
+.link:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 40px rgba(255,107,157,0.30), 0 0 50px rgba(255,182,193,0.14);
+  filter:brightness(1.03);
+}
+
+/* лёгкая реакция при клике */
+.link:active{
+  transform:translateY(-2px);
+  transition:transform .08s;
+}
+
+/* иконка слева (если используешь <img> или <span> для эмодзи) */
+.button-icon{
+  width:32px;
+  height:32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  margin-right:6px;
+  font-size:20px; /* размер если используешь эмодзи вместо изображения */
+}
+
+/* дополнительная мягкая анимация для первой кнопки (опционально) */
+.link:first-child{
+  animation:softGlow 3s infinite ease-in-out;
+}
+@keyframes softGlow{
+  0%,100%{ box-shadow:0 6px 18px rgba(255,107,157,0.18), 0 0 30px rgba(255,182,193,0.06) }
+  50%{    box-shadow:0 12px 36px rgba(255,107,157,0.28), 0 0 56px rgba(255,182,193,0.12) }
 }
 .link:hover{
   transform:translateY(-3px);transition:all .18s;
