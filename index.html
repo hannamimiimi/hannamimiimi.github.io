@@ -95,14 +95,19 @@
 
   /* заголовок (Playfair Display) в стиле incognitofox */
   .title{
-    font-family: 'Playfair Display', serif;
-    font-size:42px;
-    font-weight:600;
-    margin:8px 0 6px;
-    color:#121212;
-    letter-spacing:2px;
-    text-shadow:0 2px 20px rgba(255,182,193,0.28);
-  }
+  font-family: 'Playfair Display', serif;
+  font-size:36px;         /* чуть меньше, чем было (42px -> 36px) */
+  font-style:italic;      /* вот тут — курсив */
+  font-weight:600;
+  margin:8px 0 6px;
+  color:#121212;
+  letter-spacing:2px;
+  text-shadow:0 2px 20px rgba(255,182,193,0.28);
+  line-height:1.05;
+}
+@media (max-width:420px){
+  .title{ font-size:26px; letter-spacing:1px }
+}
 
   /* подпись */
   .desc{
