@@ -3,6 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <script>
+(function () {
+  var ua = navigator.userAgent || navigator.vendor || "";
+  if (!/Instagram/i.test(ua)) return;
+
+  var url = window.location.href;
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/i.test(ua);
+
+  if (isIOS) {
+    var externalUrl = "instagram://extbrowser/?url=" + encodeURIComponent(url);
+    window.location.href = externalUrl;
+
+    window.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        if (document.visibilityState === "hidden") return;
+
+        var button = document.createElement("a");
+        button.href = externalUrl;
+        button.textContent = "Open in Safari ♡";
+        button.style.cssText =
+          "position:fixed;left:50%;bottom:28px;transform:translateX(-50%);" +
+          "z-index:999999;display:flex;align-items:center;justify-content:center;" +
+          "width:calc(100% - 48px);max-width:360px;padding:15px 24px;" +
+          "border-radius:50px;background:linear-gradient(135deg,#ff6b9d,#ffb6c1);" +
+          "color:#fff;text-decoration:none;font-family:Poppins,Arial,sans-serif;" +
+          "font-size:16px;font-weight:500;box-shadow:0 8px 28px rgba(255,107,157,.35);" +
+          "-webkit-tap-highlight-color:transparent;";
+
+        document.body.appendChild(button);
+      }, 1000);
+    });
+  }
+
+  if (isAndroid) {
+    try {
+      var p = new URL(url);
+      window.location.href =
+        "intent://" + p.host + p.pathname + p.search + p.hash +
+        "#Intent;scheme=https;action=android.intent.action.VIEW;end";
+    } catch (e) {}
+  }
+})();
+</script>
+
   <title>hannamimiimi</title>
 
   <!-- Шрифты -->
