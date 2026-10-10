@@ -1,1 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hannamimiimi</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  overflow: hidden;
+  background: #fff7fa;
+}
+
+.page {
+  position: fixed;
+  inset: 0;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,.8), transparent 35%),
+    radial-gradient(circle at 85% 80%, rgba(255,255,255,.55), transparent 35%),
+    rgba(255, 205, 220, .72);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.hello {
+  margin: 0 0 18px;
+  font-size: 31px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #5b414b;
+}
+
+.message {
+  margin: 0 auto 34px;
+  max-width: 340px;
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: #765b65;
+}
+
+.open-button {
+  appearance: none;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 330px;
+  min-height: 58px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .86);
+  box-shadow: 0 12px 35px rgba(132, 65, 88, .13);
+  color: #c05d7e;
+  font-size: 17px;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.open-button:active {
+  transform: scale(.98);
+}
+
+.heart {
+  position: absolute;
+  z-index: 1;
+  color: rgba(255,255,255,.7);
+  user-select: none;
+  pointer-events: none;
+}
+
+.h1 {
+  top: 11%;
+  left: 12%;
+  font-size: 28px;
+  transform: rotate(-12deg);
+}
+
+.h2 {
+  top: 20%;
+  right: 13%;
+  font-size: 18px;
+  transform: rotate(15deg);
+}
+
+.h3 {
+  bottom: 16%;
+  left: 17%;
+  font-size: 20px;
+  transform: rotate(8deg);
+}
+
+.h4 {
+  bottom: 10%;
+  right: 11%;
+  font-size: 32px;
+  transform: rotate(-15deg);
+}
+
+.h5 {
+  top: 42%;
+  left: 6%;
+  font-size: 14px;
+}
+
+.h6 {
+  top: 55%;
+  right: 6%;
+  font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <span class="heart h1">♡</span>
+  <span class="heart h2">♡</span>
+  <span class="heart h3">♡</span>
+  <span class="heart h4">♡</span>
+  <span class="heart h5">♡</span>
+  <span class="heart h6">♡</span>
+
+  <main class="content">
+    <h1 class="hello">Hi, happy to see you ♡</h1>
+
+    <p class="message">
+      To visit my website, please open it in your external browser.
+    </p>
+
+    <button class="open-button" id="openButton">
+      Open in browser ♡
+    </button>
+  </main>
+
+</div>
+
+<script>
+document.getElementById("openButton").addEventListener("click", function () {
+  var destination = "https://hannamimiimi.com/";
+  var ua = navigator.userAgent || navigator.vendor || "";
+
+  var isIOS =
+    /iPhone|iPad|iPod/i.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  var isAndroid = /Android/i.test(ua);
+  var isInstagram = /Instagram/i.test(ua);
+
+  if (isInstagram && isIOS) {
+    window.location.href =
+      "instagram://extbrowser/?url=" + encodeURIComponent(destination);
+    return;
+  }
+
+  if (isInstagram && isAndroid) {
+    window.location.href =
+      "intent://hannamimiimi.com/#Intent;scheme=https;action=android.intent.action.VIEW;end";
+    return;
+  }
+
+  window.location.href = destination;
+});
+</script>
+
+</body>
+</html>
 
